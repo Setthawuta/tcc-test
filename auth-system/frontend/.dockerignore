@@ -1,0 +1,14 @@
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/
+**/.vscode/
+**/.idea/
+
+**/.git/
+**/.gitignore
+
+**/*.md
+
+**/*.log
+**/npm-debug.log*

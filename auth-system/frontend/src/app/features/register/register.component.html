@@ -1,0 +1,75 @@
+<div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+  <h2 class="text-center text-2xl font-semibold text-gray-800 mb-6">
+    สมัครสมาชิก
+  </h2>
+
+  @if (errorMessage(); as msg) {
+    <app-alert variant="error" class="block mb-4">{{ msg }}</app-alert>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4" novalidate>
+    <div>
+      <label for="reg-username" class="block text-sm font-medium text-gray-700 mb-1">
+        ชื่อผู้ใช้
+      </label>
+      <input
+        id="reg-username"
+        type="text"
+        formControlName="username"
+        autocomplete="username"
+        [attr.aria-invalid]="form.controls.username.touched && form.controls.username.invalid ? true : null"
+        aria-describedby="reg-username-err"
+        class="w-full rounded border border-gray-300 px-3 py-2 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600"
+      />
+      <p id="reg-username-err" class="text-xs text-red-600 mt-1" role="alert">
+        @if (form.controls.username.touched && form.controls.username.errors; as errs) {
+          @if (errs['required']) { กรุณาระบุชื่อผู้ใช้ }
+          @else if (errs['minlength'] || errs['maxlength']) { ชื่อผู้ใช้ต้องมี 3-50 ตัวอักษร }
+          @else if (errs['pattern']) { ชื่อผู้ใช้ต้องเป็นตัวอักษรหรือตัวเลขเท่านั้น }
+        }
+      </p>
+    </div>
+
+    <div>
+      <label for="reg-password" class="block text-sm font-medium text-gray-700 mb-1">
+        รหัสผ่าน
+      </label>
+      <password-input
+        formControlName="password"
+        autocomplete="new-password"
+      />
+      <p id="reg-password-err" class="text-xs text-red-600 mt-1" role="alert">
+        @if (form.controls.password.touched && form.controls.password.errors; as errs) {
+          @if (errs['required']) { กรุณาระบุรหัสผ่าน }
+          @else if (errs['minlength']) { รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร }
+          @else if (errs['pattern']) { รหัสผ่านต้องประกอบด้วยตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข }
+        }
+      </p>
+    </div>
+
+    <div>
+      <label for="reg-confirm" class="block text-sm font-medium text-gray-700 mb-1">
+        ยืนยันรหัสผ่าน
+      </label>
+      <password-input
+        formControlName="confirmPassword"
+        autocomplete="new-password"
+      />
+      <p id="reg-confirm-err" class="text-xs text-red-600 mt-1" role="alert">
+        @if (form.controls.confirmPassword.touched && form.errors?.['passwordMismatch']) {
+          รหัสผ่านยืนยันไม่ตรงกัน
+        }
+      </p>
+    </div>
+
+    <app-submit-button [disabled]="form.invalid" [loading]="submitting()">
+      สมัครสมาชิก
+    </app-submit-button>
+
+    <div class="text-center">
+      <a routerLink="/login" class="text-green-700 hover:text-green-800 underline text-sm">
+        กลับ
+      </a>
+    </div>
+  </form>
+</div>

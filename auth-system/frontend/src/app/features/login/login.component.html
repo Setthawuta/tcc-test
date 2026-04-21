@@ -1,0 +1,48 @@
+<div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+  <h2 class="text-center text-2xl font-semibold text-gray-800 mb-6">
+    ลงชื่อเข้าใช้งาน
+  </h2>
+
+  @if (infoMessage(); as msg) {
+    <app-alert variant="success" class="block mb-4">{{ msg }}</app-alert>
+  }
+
+  @if (errorMessage(); as msg) {
+    <app-alert variant="error" class="block mb-4">{{ msg }}</app-alert>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4" novalidate>
+    <div>
+      <label for="login-username" class="block text-sm font-medium text-gray-700 mb-1">
+        ชื่อผู้ใช้
+      </label>
+      <input
+        id="login-username"
+        type="text"
+        formControlName="username"
+        autocomplete="username"
+        class="w-full rounded border border-gray-300 px-3 py-2 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600"
+      />
+    </div>
+
+    <div>
+      <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">
+        รหัสผ่าน
+      </label>
+      <password-input
+        formControlName="password"
+        autocomplete="current-password"
+      />
+    </div>
+
+    <app-submit-button [disabled]="form.invalid" [loading]="submitting()">
+      ลงชื่อเข้าใช้งาน
+    </app-submit-button>
+
+    <div class="text-center">
+      <a routerLink="/register" class="text-green-700 hover:text-green-800 underline text-sm">
+        สมัครสมาชิก
+      </a>
+    </div>
+  </form>
+</div>
