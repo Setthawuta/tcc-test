@@ -9,7 +9,6 @@ COPY src/AuthSystem.Domain/AuthSystem.Domain.csproj src/AuthSystem.Domain/
 COPY src/AuthSystem.Application/AuthSystem.Application.csproj src/AuthSystem.Application/
 COPY src/AuthSystem.Infrastructure/AuthSystem.Infrastructure.csproj src/AuthSystem.Infrastructure/
 COPY src/AuthSystem.Api/AuthSystem.Api.csproj src/AuthSystem.Api/
-COPY tests/AuthSystem.UnitTests/AuthSystem.UnitTests.csproj tests/AuthSystem.UnitTests/
 
 RUN dotnet restore src/AuthSystem.Api/AuthSystem.Api.csproj
 
